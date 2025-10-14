@@ -1,11 +1,16 @@
 # app.py
+## Flask | Django | FastAPI
+
 from fastapi import FastAPI
 from pydantic import BaseModel
 import pickle
 import numpy as np
 
+### API - Application Programming Interface : A way to communicate between two applications
+
 # === Load Model ===
-MODEL_PATH = "/Users/rohanpatil/Desktop/ai_ml_projects/project_1/models/hearing_test_model.pkl"
+MODEL_PATH = "/Users/rohanpatil/Desktop/ai_ml_projects/project_1/models/health_model.pkl"
+
 with open(MODEL_PATH, "rb") as f:
     model = pickle.load(f)
 
@@ -16,11 +21,12 @@ app = FastAPI(title="Hearing Test Predictor")
 class PredictionInput(BaseModel):
     age: float
     physical_score: float
+    
 
 # === Routes ===
 @app.get("/")
 def read_root():
-    return {"message": "Hearing Test Predictor is running"}
+    return {"message": "Hearing Test Predictor is running fine !"}
 
 @app.post("/predict/")
 def predict(input_data: PredictionInput):
